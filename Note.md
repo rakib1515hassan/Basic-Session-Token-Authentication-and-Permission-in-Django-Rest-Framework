@@ -5,8 +5,9 @@
             'rest_framework.authtoken'
         ]
     2) Token Genaret:
-         a) Genaret token by admin pannel
-         b) DRF commend , go powershell = python manage.py drf_create_token <you username>
+         a) Genaret token by admin pannel ( এই ক্ষেত্রে আপনাকে মেনুয়ালি token create করতে হবে )
+         b) DRF commend , go powershell = python manage.py drf_create_token you_username এটি দিলে ঐ user এর নামে token table এ
+            একটি টোকেন create হয়ে যাবে।
          c) By exposing an API endpoint:
                 (i) import this in your urls.py-----
                     from rest_framework.authtoken.views import obtain_auth_token
@@ -16,7 +17,8 @@
                 (iii) URL Hit on Command Prompt and token autometically given and save it on authtoken_token Table/Model
                     # To hit this url (http POST http://127.0.0.1:8000/authtoken_genarate/ username="your_username" password="your_password")
                     path('authtoken_genarate/', obtain_auth_token)
-                (iv) যদি view.py এর কোন Class or Function থেকে Custom Token create কোরতে চাই তবে, প্রথমে আমাদেরকে একটি CustomAuthToken class নিতে 
+                    
+            *** (iv) যদি view.py এর কোন Class or Function থেকে Custom Token create কোরতে চাই তবে, প্রথমে আমাদেরকে একটি CustomAuthToken class নিতে 
                      হবে। এক্ষেত্রে আমরা এটির জন্যে আলাদা auth.py নিয়ে এর ভেতর আথবা direct view.py এর ভেতর CustomAuthToken class নিব। যা আমরা
                      এই Project এ Accounts app এর ভেতর করেছি।
                      এর পর আমাদের Accounts urls.py এর ভেতর path('authtoken_genarate/', obtain_auth_token), এই URL এর পরিবর্তে 

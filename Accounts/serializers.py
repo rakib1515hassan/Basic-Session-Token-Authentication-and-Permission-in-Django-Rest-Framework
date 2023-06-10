@@ -58,8 +58,7 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
             first_name=validated_data['first_name'],
             last_name=validated_data['last_name']
         )
-
-        
+   
         user.set_password(validated_data['password'])
         user.save()
 
@@ -69,19 +68,20 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
 # --------------------------------( For Login )----------------------------------------
 class UserLoginSerializer(serializers.ModelSerializer):
   email = serializers.EmailField(max_length=255)
+#   username = serializers.CharField(max_length=255)
   class Meta:
     model = User
     fields = ['email', 'password']
+    # fields = ['username', 'password']
 
 
 
 
-# class ProfileSerializer(serializers.ModelSerializer):
-#     user = RegisterSerializer(many=True, read_only=True)
-
-#     class Meta:
-#         model = Profile
-#         fields = ['phone', 'address', 'gender', 'user']
+# --------------------------------( User Profile )----------------------------------------
+class UserProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['id', 'username', 'first_name', 'last_name', 'email',]
 
 
 
