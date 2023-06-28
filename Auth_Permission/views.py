@@ -25,6 +25,7 @@ from rest_framework import generics
 
 # For Authentication --------------------------
 from rest_framework.authentication import BasicAuthentication, SessionAuthentication
+from Auth_Permission.custom_authentication import CustomAuthentication
 from rest_framework.permissions import (
     IsAdminUser, 
     IsAuthenticated, 
@@ -37,24 +38,7 @@ from rest_framework.permissions import (
 
 from Auth_Permission.permissions import Only_GET_allow, IsSuperUser
 
-from rest_framework.exceptions import AuthenticationFailed
-
 # Create your views here.-----------------------------------------------------------------------------------------------
-
-
-# class CustomAuthentication(BaseAuthentication):
-#     def authenticate(self, request):
-#         # Implement your authentication logic here
-#         # You can access request.user and request.auth to set the authenticated user and authentication credentials
-
-#         # If authentication is successful, return a tuple of (user, auth) or None if authentication fails
-#         # Example: return (user, None)
-
-#         # If authentication credentials are invalid, raise AuthenticationFailed exception
-#         # Example: raise AuthenticationFailed('Invalid token')
-
-#         raise AuthenticationFailed('Authentication credentials were not provided.')
-
 
 
 # NOTE ----------------------------------------------( viewsets )--------------------------------------------------
@@ -69,8 +53,9 @@ class StudentModelViewSet(viewsets.ModelViewSet):
     serializer_class = StudentSerializer
 
     # NOTE -----Authentication------------
-    # authentication_classes = [BasicAuthentication]  # BasicAuthentication এর ক্ষত্রে কি হবে তা permission_classes এর মাধ্যমে বলে দিতে হবে।
-    authentication_classes = [SessionAuthentication] # Django Session Backend কে use করে এ টি।
+    authentication_classes = [BasicAuthentication]  # BasicAuthentication এর ক্ষত্রে কি হবে তা permission_classes এর মাধ্যমে বলে দিতে হবে।
+    # authentication_classes = [SessionAuthentication] # Django Session Backend কে use করে এ টি।
+    # authentication_classes = [CustomAuthentication] 
 
 
     # NOTE -----Permission----------------
