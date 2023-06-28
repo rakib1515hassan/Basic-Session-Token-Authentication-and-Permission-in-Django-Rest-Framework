@@ -24,6 +24,8 @@ urlpatterns = [
     path('Student_Info/', Student_Info),
     path('Student_Info/<int:pk>/', Student_Info),
 
+    
+
 
     # For Session Authentication Weneed Login Form, That whay it are needed.
     path('auth/', include('rest_framework.urls', namespace='rest_framework')),

@@ -12,20 +12,36 @@ from rest_framework import viewsets
 # from rest_framework.viewsets import ModelViewSet, ReadOnlyModelViewSet
 
 from rest_framework import mixins
-# from rest_framework.mixins import CreateModelMixin, ListModelMixin, RetrieveModelMixin, UpdateModelMixin, DestroyModelMixin
+# from rest_framework.mixins import (
+#     CreateModelMixin, 
+#     ListModelMixin, 
+#     RetrieveModelMixin, 
+#     UpdateModelMixin, 
+#     DestroyModelMixin
+# )
 
 from rest_framework import generics
 # from rest_framework.generics import GenericAPIView, RetrieveUpdateDestroyAPIView
 
 # For Authentication --------------------------
 from rest_framework.authentication import BasicAuthentication, SessionAuthentication
-from rest_framework.permissions import IsAdminUser, IsAuthenticated, IsAuthenticatedOrReadOnly, AllowAny, DjangoModelPermissions, DjangoModelPermissionsOrAnonReadOnly, DjangoObjectPermissions
+from rest_framework.permissions import (
+    IsAdminUser, 
+    IsAuthenticated, 
+    IsAuthenticatedOrReadOnly, 
+    AllowAny, 
+    DjangoModelPermissions, 
+    DjangoModelPermissionsOrAnonReadOnly, 
+    DjangoObjectPermissions
+)
 
 from Auth_Permission.permissions import Only_GET_allow, IsSuperUser
 
 from rest_framework.exceptions import AuthenticationFailed
 
 # Create your views here.-----------------------------------------------------------------------------------------------
+
+
 # class CustomAuthentication(BaseAuthentication):
 #     def authenticate(self, request):
 #         # Implement your authentication logic here
@@ -53,8 +69,8 @@ class StudentModelViewSet(viewsets.ModelViewSet):
     serializer_class = StudentSerializer
 
     # NOTE -----Authentication------------
-    authentication_classes = [BasicAuthentication]
-    # authentication_classes = [SessionAuthentication]
+    # authentication_classes = [BasicAuthentication]  # BasicAuthentication এর ক্ষত্রে কি হবে তা permission_classes এর মাধ্যমে বলে দিতে হবে।
+    authentication_classes = [SessionAuthentication] # Django Session Backend কে use করে এ টি।
 
 
     # NOTE -----Permission----------------
