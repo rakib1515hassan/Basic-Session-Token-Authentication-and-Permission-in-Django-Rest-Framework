@@ -8,6 +8,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('Auth_Permission.urls')),
     path('account/', include('Accounts.urls')),
+    path('throttling/', include('Throttling.urls')),
 ]
 
 if settings.DEBUG:

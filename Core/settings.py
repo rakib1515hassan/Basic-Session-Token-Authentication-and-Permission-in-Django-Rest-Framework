@@ -30,6 +30,7 @@ INSTALLED_APPS = [
                                  # This app make a authentication_token model in database.
     'Auth_Permission',
     'Accounts',
+    'Throttling',
 ]
 
 MIDDLEWARE = [
@@ -128,10 +129,44 @@ REST_FRAMEWORK = {
     #     'rest_framework.authentication.SessionAuthentication',
     # ],
     
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated',
-    ]
+    # 'DEFAULT_PERMISSION_CLASSES': [
+    #     'rest_framework.permissions.IsAuthenticated',
+    # ],
+
+    ## NOTE Throttling---------------------------------------
+    """
+        যদি globally আমরা সব view.py class এ throttle_classes = [AnonRateThrottle, UserRateThrottle]
+        টি কে declare না কোরতে চাই তবে setting.py তে তা এই ভাবে বলে দিতে হবে। এতে প্রত্যেক class 
+        আমাদের আর উল্লেখ করার দরকার নেই।
+    """
+    'DEFAULT_THROTTLE_CLASSES': [
+        'rest_framework.throttling.AnonRateThrottle',
+        'rest_framework.throttling.UserRateThrottle'
+    ],
+
+    'DEFAULT_THROTTLE_RATES': {
+        'anon': '20/day', # second, minute, hour or day
+        'user': '50/day',  # second, minute, hour or day
+
+        'custom_1': '2/minute',
+        'custom_2': '4/hour',
+        'custom_3': '8/day',
+
+        'Content': '5/minute',
+        'modyfy' : '2/day',
+    },
+
 }
 
 
 
+# REST_FRAMEWORK = {
+#     'DEFAULT_THROTTLE_CLASSES': [
+#         'rest_framework.throttling.AnonRateThrottle',
+#         'rest_framework.throttling.UserRateThrottle'
+#     ],
+#     'DEFAULT_THROTTLE_RATES': {
+#         'anon': '2/day',
+#         'user': '5/day'
+#     }
+# }
