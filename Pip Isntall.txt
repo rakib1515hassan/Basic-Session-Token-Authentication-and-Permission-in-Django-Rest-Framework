@@ -12,6 +12,11 @@
 
 	pip install -U -r requirements.txt
 
-4. django-shopping-cart 0.1
+4. Dump All data
+	
+	python manage.py dumpdata > backup.json
+	py manage.py dumpdata > backup.json
 
-	pip install django-shopping-cart
+5. Loaddat All data In Database
+
+	python manage.py loaddata backup.json
